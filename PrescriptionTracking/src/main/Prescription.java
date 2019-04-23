@@ -15,7 +15,7 @@ public class Prescription {
 	
 	
 	public String getName() {
-		return this.getName();
+		return this.prescriptionName;
 	}//end getName
 	
 	public void setName(String prescriptionName) {
