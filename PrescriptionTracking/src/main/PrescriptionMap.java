@@ -1,6 +1,8 @@
 package main;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Map.Entry;
 
@@ -77,6 +79,20 @@ public class PrescriptionMap {
 		
 	}//end medAddition
 	
+	 /*
+	  * The deletePrescription method will delete the specified prescription.
+	  */
+	public void deletePrescription(String name) {
+		Iterator<Map.Entry<Integer, Prescription>> iterator = hmap.entrySet().iterator();
+		while(iterator.hasNext()) {
+			Map.Entry<Integer, Prescription> entry = iterator.next();
+			if(name.equalsIgnoreCase(entry.getValue().getName())) {
+				iterator.remove();
+			}//end if
+		}//end while
+			
+	}//end deletePrescription
+	
 	/*
 	 * The printData method simply formats the header of the table that will be printed out when the program terminates
 	 */
@@ -94,4 +110,4 @@ public class PrescriptionMap {
 			System.out.println(entry.getValue());
 		}//end for
 	}//end printMap
-}
+}//end class
