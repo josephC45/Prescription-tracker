@@ -27,8 +27,6 @@ public class PrescriptionMap {
 	 * until the user types in "no".<p>
 	 */
 	public void medDocumentation() {
-		
-		Scanner scan = new Scanner(System.in);
 		int key = 0;
 		boolean prescript_Decision = true;
 		
@@ -52,11 +50,9 @@ public class PrescriptionMap {
 			int hoursApart = scan.nextInt();
 		
 			System.out.println();
-			
 			Prescription perscript = new Prescription(prescriptionName, dosage, dailyIntake, hoursApart);
 			hmap.put(key,perscript);
 			key++;
-			
 		}//end if
 		else {
 			prescript_Decision = false;
@@ -66,11 +62,8 @@ public class PrescriptionMap {
 			
 			System.out.println();
 		}//end else
-		
 	}//end do
-		
 		while(prescript_Decision == true); 
-		
 	}//end medAddition
 	
 	 /*
