@@ -1,8 +1,6 @@
 package main;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.Map.Entry;
 
@@ -18,7 +16,7 @@ import java.util.Map.Entry;
 public class PrescriptionMap {
 	
 	HashMap<Integer,Prescription> hmap = new HashMap<Integer, Prescription>();
-	
+	private static Scanner scan = new Scanner(System.in);
 	
 	/*
 	 * <p>The medDocumentation method acts as the UI, beginning with the questions, "Do you wish to enter any prescriptions?"
@@ -39,7 +37,7 @@ public class PrescriptionMap {
 		String perscriptCount = scan.next();
 		System.out.println();
 		
-		if(perscriptCount.equalsIgnoreCase("yes")) {
+		if(perscriptCount.equalsIgnoreCase("y")) {
 			
 			System.out.print("Prescription Name: ");
 			String prescriptionName = scan.next();
@@ -67,31 +65,53 @@ public class PrescriptionMap {
 			printMap();
 			
 			System.out.println();
-			
-			System.out.println("Thank you for using my progam!");
-			System.exit(0);
 		}//end else
 		
 	}//end do
 		
 		while(prescript_Decision == true); 
-		scan.close();
 		
 	}//end medAddition
 	
 	 /*
 	  * The deletePrescription method will delete the specified prescription.
 	  */
-	public void deletePrescription(String name) {
-		Iterator<Map.Entry<Integer, Prescription>> iterator = hmap.entrySet().iterator();
-		while(iterator.hasNext()) {
-			Map.Entry<Integer, Prescription> entry = iterator.next();
-			if(name.equalsIgnoreCase(entry.getValue().getName())) {
-				iterator.remove();
-			}//end if
-		}//end while
-			
+	private void deletePrescription(int num) {
+		hmap.remove(num);
 	}//end deletePrescription
+	
+	/*
+	 * The deletionPrompt provides a UI for the user to interact with which allows them to 
+	 * specify what prescription they wish to remove.
+	 */
+	public void deletionPrompt(){
+		System.out.print("Do you need to delete a prescription? Y/N: ");
+		String choice = scan.next();
+		
+		while(choice.equalsIgnoreCase("y")){
+			System.out.println("Which prescription would you like to delete?");
+		
+			numericalPrint();
+		
+			System.out.println();
+			System.out.print("Please enter the number corresponding with the prescription: ");
+			int num = scan.nextInt();
+			deletePrescription(num);
+			
+			System.out.println("This is what remains after the deletion.");
+		
+			printData();
+			printMap();
+			System.exit(0);
+			
+		}//end while
+		scan.close();
+		
+		if(choice.equalsIgnoreCase("n")){
+			System.out.println("You have chosen not to delete a prescription.");
+			System.exit(0);
+		}//end if
+	}//end deletePrompt method
 	
 	/*
 	 * The printData method simply formats the header of the table that will be printed out when the program terminates
@@ -110,4 +130,15 @@ public class PrescriptionMap {
 			System.out.println(entry.getValue());
 		}//end for
 	}//end printMap
+	
+	/*
+	 * This method prints the table with the key values and the prescription names.
+	 */
+	public void numericalPrint(){
+		int i = 0;
+		for(Entry<Integer, Prescription> entry: hmap.entrySet()) {
+			System.out.println(i + ". " + entry.getValue().getName());
+			i++;
+		}//end for
+	}//end numbericalPrint
 }//end class
