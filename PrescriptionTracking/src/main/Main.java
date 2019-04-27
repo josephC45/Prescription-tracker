@@ -11,7 +11,7 @@ import java.util.Calendar;
  * <p> Details on the information found in the method calls can be found in the documentation provided in the PrescriptionMap class.<p>
  * 
  * @author: Joseph Curto
- * @version: 04/07/2019
+ * @version: 04/27/2019
  */
 public class Main {
 	
@@ -26,6 +26,9 @@ public class Main {
 		
 		map.printData();
 		map.printMap();
+		System.out.println();
+		
+		map.deletionPrompt();
 	}//end main
 	
 	/*
@@ -35,13 +38,13 @@ public class Main {
 		Calendar cal = Calendar.getInstance();
 		int time = cal.get(Calendar.HOUR_OF_DAY);
 		
-		if(time >= 0 || time < 12) {
+		if(time >= 0 && time < 12) {
 			System.out.println("Good morning user!");
 		}
-		else if(time > 12 || time <= 15) {
+		else if(time > 12 && time <= 15) {
 			System.out.println("Good afternoon user");
 		}
-		else if(time > 15 || time <= 19) {
+		else if(time > 15 && time <= 19) {
 			System.out.println("Good evening user!");
 		}
 	}//end timeOfDay
