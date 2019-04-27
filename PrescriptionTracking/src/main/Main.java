@@ -41,7 +41,7 @@ public class Main {
 		if(time >= 0 && time < 12) {
 			System.out.println("Good morning user!");
 		}
-		else if(time > 12 && time <= 15) {
+		else if(time >= 12 && time <= 15) {
 			System.out.println("Good afternoon user");
 		}
 		else if(time > 15 && time <= 19) {
