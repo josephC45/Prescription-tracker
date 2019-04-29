@@ -24,11 +24,10 @@ public class Main {
 		System.out.println();
 		map.medDocumentation();
 		
-		map.printData();
-		map.printMap();
+		map.deletionPrompt();
 		System.out.println();
 		
-		map.deletionPrompt();
+		map.alterations();
 	}//end main
 	
 	/*
