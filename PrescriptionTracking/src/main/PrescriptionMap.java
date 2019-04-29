@@ -107,6 +107,60 @@ public class PrescriptionMap {
 	}//end deletePrompt method
 	
 	/*
+	 * The alterations method allows the user to alter already existing prescriptions.
+	 */
+	public void alterations(){
+		System.out.print("Would you like alter a certain perscription? Y/N: ");
+		String decision = scan.next();
+		if(decision.equalsIgnoreCase("y")){
+			numericalPrint();
+			System.out.print("Please enter the number corresponding with the prescription you wish to alter: ");
+			int num = scan.nextInt();
+			
+			System.out.print("What do you want to alter? : Dosage, Intake, or Hours apart: ");
+			String choice = scan.next();
+			
+			System.out.print("What would you like the new number to be? : ");
+			int new_num = scan.nextInt();
+			
+			
+			//Changes the existing values to new ones.
+			if(choice.equalsIgnoreCase("Dosage")){
+				hmap.get(num).setDosage((float)new_num);
+				
+			}//end if
+			
+			else if(choice.equalsIgnoreCase("Intake")){
+				hmap.get(num).setDailyIntake(new_num);
+				
+			}//end else if
+			
+			else if(choice.equalsIgnoreCase("Hours Apart")){
+				hmap.get(num).setHoursApart(new_num);
+				
+			}//end else if
+			
+			printData();
+			printMap();
+			System.exit(0);
+			
+		}//end while 
+		
+		else if(decision.equalsIgnoreCase("n")){
+			System.out.println("You have chosen not to alter any prescriptions.");
+		}//end if
+		
+		else{
+			System.out.println("Please enter a Y (for yes) or an N (for no).");
+		}//end else
+		
+		scan.close();
+		
+	}//end alterations
+	
+	//THEN POSSIBLY IMPLEMENT A WAY TO PERMENANTLY SAVE HASHMAP TO A TXT FILE FOR FUTURE ADDITIONS, DELETIONS AND ALTERATIONS.
+	
+	/*
 	 * The printData method simply formats the header of the table that will be printed out when the program terminates
 	 */
 	public void printData() {
