@@ -107,52 +107,55 @@ public class PrescriptionMap {
 	}//end deletePrompt method
 	
 	/*
-	 * The alterations method allows the user to alter already existing prescriptions.
+	 * The alterations method allows the user to alter an already existing prescription.
 	 */
 	public void alterations(){
 		System.out.print("Would you like alter a certain perscription? Y/N: ");
 		String decision = scan.next();
-		if(decision.equalsIgnoreCase("y")){
+		String second_Decision = null;
+		
+		if(!decision.equalsIgnoreCase("y") || !decision.equalsIgnoreCase("n")){
+			System.out.print("Please enter a Y (for yes) or an N (for no): ");
+			String second_Decision = scan.next();
+			decision = second_Decision;
+		}//end if
+		
+		if(decision.equalsIgnoreCase("y") || second_Decision.equalsIgnoreCase("y")){
 			numericalPrint();
 			System.out.print("Please enter the number corresponding with the prescription you wish to alter: ");
 			int num = scan.nextInt();
 			
+			scan.nextLine();
 			System.out.print("What do you want to alter? : Dosage, Intake, or Hours apart: ");
-			String choice = scan.next();
+			String choice = scan.nextLine();
 			
 			System.out.print("What would you like the new number to be? : ");
 			int new_num = scan.nextInt();
 			
-			
 			//Changes the existing values to new ones.
 			if(choice.equalsIgnoreCase("Dosage")){
 				hmap.get(num).setDosage((float)new_num);
-				
 			}//end if
 			
 			else if(choice.equalsIgnoreCase("Intake")){
 				hmap.get(num).setDailyIntake(new_num);
-				
 			}//end else if
 			
 			else if(choice.equalsIgnoreCase("Hours Apart")){
 				hmap.get(num).setHoursApart(new_num);
-				
 			}//end else if
 			
+			System.out.println("This is the result of the alteration.");
 			printData();
 			printMap();
 			System.exit(0);
 			
-		}//end while 
-		
-		else if(decision.equalsIgnoreCase("n")){
-			System.out.println("You have chosen not to alter any prescriptions.");
 		}//end if
 		
-		else{
-			System.out.println("Please enter a Y (for yes) or an N (for no).");
-		}//end else
+		else if(decision.equalsIgnoreCase("n") || second_Decision.equalsIgnoreCase("n")){
+			System.out.println("You have chosen not to alter any prescriptions.");
+			System.exit(0);
+		}//end else if
 		
 		scan.close();
 		
