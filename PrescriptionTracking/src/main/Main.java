@@ -38,13 +38,13 @@ public class Main {
 		int time = cal.get(Calendar.HOUR_OF_DAY);
 		
 		if(time >= 0 && time < 12) {
-			System.out.println("Good morning user!");
+			System.out.println("Good morning user! It is " + cal.getTime());
 		}
 		else if(time >= 12 && time <= 15) {
-			System.out.println("Good afternoon user");
+			System.out.println("Good afternoon user! It is " + cal.getTime());
 		}
 		else if(time > 15 && time <= 19) {
-			System.out.println("Good evening user!");
+			System.out.println("Good evening user! It is " + cal.getTime());
 		}
 	}//end timeOfDay
 
