@@ -112,15 +112,8 @@ public class PrescriptionMap {
 	public void alterations(){
 		System.out.print("Would you like alter a certain perscription? Y/N: ");
 		String decision = scan.next();
-		String second_Decision = null;
 		
-		if(!decision.equalsIgnoreCase("y") || !decision.equalsIgnoreCase("n")){
-			System.out.print("Please enter a Y (for yes) or an N (for no): ");
-			String second_Decision = scan.next();
-			decision = second_Decision;
-		}//end if
-		
-		if(decision.equalsIgnoreCase("y") || second_Decision.equalsIgnoreCase("y")){
+		if(decision.equalsIgnoreCase("y")){
 			numericalPrint();
 			System.out.print("Please enter the number corresponding with the prescription you wish to alter: ");
 			int num = scan.nextInt();
@@ -152,7 +145,7 @@ public class PrescriptionMap {
 			
 		}//end if
 		
-		else if(decision.equalsIgnoreCase("n") || second_Decision.equalsIgnoreCase("n")){
+		else if(decision.equalsIgnoreCase("n")){
 			System.out.println("You have chosen not to alter any prescriptions.");
 			System.exit(0);
 		}//end else if
