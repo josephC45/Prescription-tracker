@@ -27,7 +27,7 @@ public class PrescriptionMap {
 	 * until the user types in "no".<p>
 	 */
 	public void medDocumentation() {
-		int key = 0;
+		int key = 1;
 		boolean prescript_Decision = true;
 		
 		do {
@@ -155,7 +155,7 @@ public class PrescriptionMap {
 			
 			while(!decision.equalsIgnoreCase("y") || decision.equalsIgnoreCase("n")){
 				valid = false;
-				System.out.print("You must enter either a Y or a N: ");
+				System.out.print("You must enter either a Y(yes) or an N(no): ");
 				String second_Decision = scan.next();
 				
 				if(second_Decision.equalsIgnoreCase("y")){
@@ -209,7 +209,7 @@ public class PrescriptionMap {
 	 * This method prints the table with the key values and the prescription names.
 	 */
 	public void numericalPrint(){
-		int i = 0;
+		int i = 1;
 		for(Entry<Integer, Prescription> entry: hmap.entrySet()) {
 			System.out.println(i + ". " + entry.getValue().getName());
 			i++;
