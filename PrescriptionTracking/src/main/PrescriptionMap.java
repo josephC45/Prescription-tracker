@@ -10,13 +10,18 @@ import java.util.Map.Entry;
  * <p> This class creates a hash map of the prescriptions and the details you enter.<p>
  * 
  * @author: Joseph Curto
- * @version: 05/03/2019
+ * @version: 05/06/2019
  */
 
 public class PrescriptionMap {
 	
 	HashMap<Integer,Prescription> hmap = new HashMap<Integer, Prescription>();
 	private static Scanner scan = new Scanner(System.in);
+	
+	private String prescriptionName;
+	private float dosage;
+	private int dailyIntake;
+	private int hoursApart;
 	
 	/*
 	 * <p>The medDocumentation method acts as the UI, beginning with the questions, "Do you wish to enter any prescriptions?"
@@ -42,14 +47,18 @@ public class PrescriptionMap {
 			
 			System.out.print("Enter the dosage in milligrams: ");
 			float dosage = scan.nextFloat();
+			validInputCheck();
 			
 			System.out.print("Enter the daily amount: ");
 			int dailyIntake = scan.nextInt();
+			validInputCheck();
 			
 			System.out.print("Enter how many hours apart between dosages: ");
 			int hoursApart = scan.nextInt();
+			validInputCheck();
 		
 			System.out.println();
+			
 			Prescription perscript = new Prescription(prescriptionName, dosage, dailyIntake, hoursApart);
 			hmap.put(key,perscript);
 			key++;
@@ -65,6 +74,28 @@ public class PrescriptionMap {
 	}//end do
 		while(prescript_Decision == true); 
 	}//end medAddition
+	
+	/*
+	 * The validInputCheck method checks to see whether or not the user input is follows our parameters.
+	 */
+	private void validInputCheck(){
+		
+		while(dosage > 120){
+			System.out.print("You must enter a valid dosage(mg); ");
+			dosage = scan.nextFloat();
+		}//end while
+	
+		while(dailyIntake > 12){
+			System.out.print("Please enter a lower daily intake: ");
+			dailyIntake = scan.nextInt();
+		}//end while
+		
+		while(hoursApart > 24){
+			System.out.print("Please enter a valid time period between dosages: ");
+			hoursApart = scan.nextInt();
+		}//end while
+			
+	}//end validInputCheck
 	
 	 /*
 	  * The deletePrescription method will delete the specified prescription.
