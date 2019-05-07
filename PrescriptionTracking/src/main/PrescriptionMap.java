@@ -188,30 +188,30 @@ public class PrescriptionMap {
 				System.exit(0);
 			}//end if
 			
-			else if(decision.equalsIgnoreCase("n")){
+		else if(decision.equalsIgnoreCase("n")){
+			valid = false;
+			noAlterationPrompt();
+		}//end else if
+			
+		while(!decision.equalsIgnoreCase("y") || decision.equalsIgnoreCase("n")){
+			valid = false;
+			System.out.print("You must enter either a Y(yes) or an N(no): ");
+			String second_Decision = scan.next();
+				
+			if(second_Decision.equalsIgnoreCase("y")){
+				valid = true;
+				decision = second_Decision;
+			}//end if
+				
+			else if(second_Decision.equalsIgnoreCase("n")){
 				valid = false;
 				noAlterationPrompt();
 			}//end else if
-			
-			while(!decision.equalsIgnoreCase("y") || decision.equalsIgnoreCase("n")){
-				valid = false;
-				System.out.print("You must enter either a Y(yes) or an N(no): ");
-				String second_Decision = scan.next();
-				
-				if(second_Decision.equalsIgnoreCase("y")){
-					valid = true;
-					decision = second_Decision;
-				}//end if
-				
-				else if(second_Decision.equalsIgnoreCase("n")){
-					valid = false;
-					noAlterationPrompt();
-				}//end else if
-			}//end while
-		}//end do
+		}//end while
+	}//end do
 		
-		while(valid);
-		scan.close();
+	while(valid);
+	scan.close();
 		
 	}//end alterations
 	
