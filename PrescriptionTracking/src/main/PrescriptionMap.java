@@ -154,23 +154,32 @@ public class PrescriptionMap {
 				int num = scan.nextInt();
 				
 				scan.nextLine();
-				System.out.print("What do you want to alter? Dosage, Intake, or Hours Apart: ");
+				System.out.print("What do you want to alter? Name, Dosage, Intake, or Hours Apart: ");
 				String choice = scan.nextLine();
 				
-				System.out.print("What would you like the new number to be? : ");
-				int new_num = scan.nextInt();
-				
-				//Changes the existing values to new ones.
-				if(choice.equalsIgnoreCase("Dosage")){
-					hmap.get(num).setDosage((float)new_num);
+				if(choice.equalsIgnoreCase("Name")){
+					System.out.print("What would you like the new name to be: ");
+					String new_Name = scan.next();
+					hmap.get(num).setName(new_Name);
+					
 				}//end if
 				
-				else if(choice.equalsIgnoreCase("Intake")){
-					hmap.get(num).setDailyIntake(new_num);
-				}//end else if
+				else if(!choice.equalsIgnoreCase("Name")){
+					System.out.print("What would you like the new number to be? : ");
+					int new_num = scan.nextInt();
 				
-				else if(choice.equalsIgnoreCase("Hours Apart")){
-					hmap.get(num).setHoursApart(new_num);
+				//Changes the existing values to new ones.
+					if(choice.equalsIgnoreCase("Dosage")){
+						hmap.get(num).setDosage((float)new_num);
+					}//end if
+				
+					else if(choice.equalsIgnoreCase("Intake")){
+						hmap.get(num).setDailyIntake(new_num);
+					}//end else if
+				
+					else if(choice.equalsIgnoreCase("Hours Apart")){
+						hmap.get(num).setHoursApart(new_num);
+					}//end nested else if
 				}//end else if
 				
 				System.out.println("This is the result of the alteration.");
