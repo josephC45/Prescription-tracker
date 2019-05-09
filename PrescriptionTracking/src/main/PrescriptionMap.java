@@ -10,7 +10,7 @@ import java.util.Map.Entry;
  * <p> This class creates a hash map of the prescriptions and the details you enter.<p>
  * 
  * @author: Joseph Curto
- * @version: 05/07/2019
+ * @version: 05/08/2019
  */
 
 public class PrescriptionMap {
@@ -168,18 +168,13 @@ public class PrescriptionMap {
 					System.out.print("What would you like the new number to be? : ");
 					int new_num = scan.nextInt();
 				
-				//Changes the existing values to new ones.
-					if(choice.equalsIgnoreCase("Dosage")){
-						hmap.get(num).setDosage((float)new_num);
-					}//end if
-				
-					else if(choice.equalsIgnoreCase("Intake")){
-						hmap.get(num).setDailyIntake(new_num);
-					}//end else if
-				
-					else if(choice.equalsIgnoreCase("Hours Apart")){
-						hmap.get(num).setHoursApart(new_num);
-					}//end nested else if
+					//Changes the existing values to new ones.
+					switch(choice){
+					case "Dosage": hmap.get(num).setDosage((float)new_num); break;
+					case "Intake": hmap.get(num).setDailyIntake(new_num); break;
+					case "Hours Apart": hmap.get(num).setHoursApart(new_num); break;
+					}//end switch
+					
 				}//end else if
 				
 				System.out.println("This is the result of the alteration.");
