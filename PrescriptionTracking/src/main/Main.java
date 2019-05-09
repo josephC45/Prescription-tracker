@@ -11,7 +11,7 @@ import java.util.Calendar;
  * <p> Details on the information found in the method calls can be found in the documentation provided in the PrescriptionMap class.<p>
  * 
  * @author: Joseph Curto
- * @version: 05/01/2019
+ * @version: 05/08/2019
  */
 public class Main {
 	
@@ -34,18 +34,12 @@ public class Main {
 	 * The timeOfDay method checks the time on a 24hr base and returns the specified greeting.
 	 */
 	public static void timeOfDay() {
-		Calendar cal = Calendar.getInstance();
-		int time = cal.get(Calendar.HOUR_OF_DAY);
+		Date date = new Date();
 		
-		if(time >= 0 && time < 12) {
-			System.out.println("Good morning user! It is " + cal.getTime());
-		}
-		else if(time >= 12 && time <= 15) {
-			System.out.println("Good afternoon user! It is " + cal.getTime());
-		}
-		else if(time > 15 && time <= 19) {
-			System.out.println("Good evening user! It is " + cal.getTime());
-		}
+		SimpleDateFormat dateFormat1 = new SimpleDateFormat("E");
+		SimpleDateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yy");
+		
+		System.out.println("Today is " + dateFormat1.format(date) + " " + dateFormat2.format(date));
 	}//end timeOfDay
 
 }//end main 
