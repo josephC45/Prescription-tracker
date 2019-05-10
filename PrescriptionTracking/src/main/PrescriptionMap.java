@@ -142,70 +142,62 @@ public class PrescriptionMap {
 	 */
 	public void alterations(){
 		
-		boolean valid = true;
-		
-		do{
-			System.out.print("Would you like alter a certain perscription? Y/N: ");
-			String decision = scan.next();
-		
-			if(decision.equalsIgnoreCase("y")){
-				numericalPrint();
-				System.out.print("Please enter the number corresponding with the prescription you wish to alter: ");
-				int num = scan.nextInt();
-				
-				scan.nextLine();
-				System.out.print("What do you want to alter? Name, Dosage, Intake, or Hours Apart: ");
-				String choice = scan.nextLine();
-				
-				if(choice.equalsIgnoreCase("Name")){
-					System.out.print("What would you like the new name to be: ");
-					String new_Name = scan.next();
-					hmap.get(num).setName(new_Name);
-					
-				}//end if
-				
-				else if(!choice.equalsIgnoreCase("Name")){
-					System.out.print("What would you like the new number to be? : ");
-					int new_num = scan.nextInt();
-				
-					//Changes the existing values to new ones.
-					switch(choice){
-					case "Dosage": hmap.get(num).setDosage((float)new_num); break;
-					case "Intake": hmap.get(num).setDailyIntake(new_num); break;
-					case "Hours Apart": hmap.get(num).setHoursApart(new_num); break;
-					}//end switch
-					
-				}//end else if
-				
-				System.out.println("This is the result of the alteration.");
-				printData();
-				printMap();
-				System.exit(0);
-			}//end if
-			
-		else if(decision.equalsIgnoreCase("n")){
-			valid = false;
-			noAlterationPrompt();
-		}//end else if
+		System.out.print("Would you like alter a certain perscription? Y/N: ");
+		String decision = scan.next();
 			
 		while(!decision.equalsIgnoreCase("y") || decision.equalsIgnoreCase("n")){
-			valid = false;
-			System.out.print("You must enter either a Y(yes) or an N(no): ");
+			System.out.print("You must enter either a Y or a N: ");
 			String second_Decision = scan.next();
 				
 			if(second_Decision.equalsIgnoreCase("y")){
-				valid = true;
 				decision = second_Decision;
 			}//end if
 				
 			else if(second_Decision.equalsIgnoreCase("n")){
-				valid = false;
 				noAlterationPrompt();
 			}//end else if
+					
 		}//end while
-	}//end do
 		
-	while(valid);
+		if(decision.equalsIgnoreCase("y")){
+			numericalPrint();
+			System.out.print("Please enter the number corresponding with the prescription you wish to alter: ");
+			int num = scan.nextInt();
+				
+			scan.nextLine();
+			System.out.print("What do you want to alter? Name, Dosage, Intake, or Hours Apart: ");
+			String choice = scan.nextLine();
+				
+			if(choice.equalsIgnoreCase("Name")){
+				System.out.print("What would you like the new name to be: ");
+				String new_Name = scan.next();
+				hmap.get(num).setName(new_Name);
+					
+			}//end if
+				
+			else if(!choice.equalsIgnoreCase("Name")){
+				System.out.print("What would you like the new number to be? : ");
+				int new_num = scan.nextInt();
+				
+				//Changes the existing values to new ones.
+				switch(choice){
+				case "Dosage": hmap.get(num).setDosage((float)new_num); break;
+				case "Intake": hmap.get(num).setDailyIntake(new_num); break;
+				case "Hours Apart": hmap.get(num).setHoursApart(new_num); break;
+				}//end switch
+					
+			}//end else if
+				
+			System.out.println("This is the result of the alteration.");
+			printData();
+			printMap();
+			System.exit(0);
+		}//end if
+			
+		else if(decision.equalsIgnoreCase("n")){
+			noAlterationPrompt();
+		}//end else if
+		
 	scan.close();
 		
 	}//end alterations
