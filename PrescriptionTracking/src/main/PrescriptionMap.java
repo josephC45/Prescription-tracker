@@ -1,5 +1,9 @@
 package main;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Map.Entry;
@@ -10,7 +14,7 @@ import java.util.Map.Entry;
  * <p> This class creates a hash map of the prescriptions and the details you enter.<p>
  * 
  * @author: Joseph Curto
- * @version: 05/08/2019
+ * @version: 05/15/2019
  */
 
 public class PrescriptionMap {
@@ -31,7 +35,7 @@ public class PrescriptionMap {
 	 * <p> After the questions have been asked, then the initial question of, "Do you wish to enter any prescriptions?" will be asked
 	 * until the user types in "no".<p>
 	 */
-	public void medDocumentation() {
+	public void medDocumentation() throws FileNotFoundException{
 		int key = 1;
 		boolean prescript_Decision = true;
 		
@@ -108,7 +112,7 @@ public class PrescriptionMap {
 	 * The deletionPrompt provides a UI for the user to interact with which allows them to 
 	 * specify what prescription they wish to remove.
 	 */
-	public void deletionPrompt(){
+	public void deletionPrompt() throws FileNotFoundException{
 		System.out.print("Do you need to delete a prescription? Y/N: ");
 		String choice = scan.next();
 		
@@ -140,7 +144,7 @@ public class PrescriptionMap {
 	/*
 	 * The alterations method allows the user to alter an already existing prescription.
 	 */
-	public void alterations(){
+	public void alterations() throws FileNotFoundException{
 		
 		System.out.print("Would you like alter a certain perscription? Y/N: ");
 		String decision = scan.next();
@@ -210,10 +214,6 @@ public class PrescriptionMap {
 		System.exit(0);
 	}//end noAlterationPrompt method
 	
-	
-	//THEN POSSIBLY IMPLEMENT A WAY TO PERMENANTLY SAVE HASHMAP TO A TXT FILE FOR FUTURE ADDITIONS, DELETIONS AND ALTERATIONS.
-	
-	
 	/*
 	 * The printData method simply formats the header of the table that will be printed out when the program terminates
 	 */
@@ -224,12 +224,21 @@ public class PrescriptionMap {
 	}//end printData method
 
 	/*
-	 * The printMap method prints the elements of the hash map to the table.
+	 * The printMap method prints the elements of the hash map to the table and saves a transcript of the
+	 * final version of the prescription tracker.
 	 */
-	public void printMap() {
+	public void printMap() throws FileNotFoundException {
+		PrintStream pt = new PrintStream(new FileOutputStream("Prescription_Track.txt"));
+		pt.println("Prescription-Tracker version as of " + Calendar.getInstance().getTime());
+		pt.println();
+		pt.printf("%-24s %-14s %-13s %-15s", "Name", "Dosage(mg)", "Daily Intake", "Hours Apart");
+		pt.println("-----------------------------------------------------------------");
+		
 		for(Entry<Integer, Prescription> entry: hmap.entrySet()) {
 			System.out.println(entry.getValue());
+			pt.println(entry.getValue());
 		}//end for
+		pt.close();
 	}//end printMap
 	
 	/*
