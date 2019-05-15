@@ -1,5 +1,8 @@
 package main;
-import java.util.Calendar;
+
+import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 /* Description:
@@ -11,7 +14,7 @@ import java.util.Calendar;
  * <p> Details on the information found in the method calls can be found in the documentation provided in the PrescriptionMap class.<p>
  * 
  * @author: Joseph Curto
- * @version: 05/08/2019
+ * @version: 05/15/2019
  */
 public class Main {
 	
@@ -22,12 +25,17 @@ public class Main {
 		timeOfDay();
 		System.out.println("This is a prescription tracker");
 		System.out.println();
-		map.medDocumentation();
 		
-		map.deletionPrompt();
-		System.out.println();
-		
-		map.alterations();
+		try {
+			map.medDocumentation();
+			map.deletionPrompt();
+			System.out.println();
+			map.alterations();
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}//end main
 	
 	/*
