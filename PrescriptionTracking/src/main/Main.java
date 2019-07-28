@@ -1,5 +1,6 @@
 package main;
 
+
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,7 +15,7 @@ import java.util.Date;
  * <p> Details on the information found in the method calls can be found in the documentation provided in the PrescriptionMap class.<p>
  * 
  * @author: Joseph Curto
- * @version: 05/15/2019
+ * @version: 07/28/2019
  */
 public class Main {
 	
@@ -22,32 +23,32 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		timeOfDay();
+		currentDate();
 		System.out.println("This is a prescription tracker");
 		System.out.println();
 		
 		try {
-			map.medDocumentation();
+			
+			map.medicalDocumentation();
 			map.deletionPrompt();
 			System.out.println();
+			
 			map.alterations();
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}//end main
 	
-	/*
-	 * The timeOfDay method checks the time on a 24hr base and returns the specified greeting.
-	 */
-	public static void timeOfDay() {
+	public static void currentDate() {
 		Date date = new Date();
+		SimpleDateFormat dayOfWeek = new SimpleDateFormat("E");
+		SimpleDateFormat dayMonthYear = new SimpleDateFormat("MM/dd/yy");
 		
-		SimpleDateFormat dateFormat1 = new SimpleDateFormat("E");
-		SimpleDateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yy");
-		
-		System.out.println("Today is " + dateFormat1.format(date) + " " + dateFormat2.format(date));
-	}//end timeOfDay
+		System.out.println("Today is " + dayOfWeek.format(date) + " " + dayMonthYear.format(date));
+	}
 
 }//end main 
+
