@@ -1,5 +1,6 @@
 package main;
 
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
@@ -9,12 +10,13 @@ import java.util.Scanner;
 import java.util.Map.Entry;
 
 
+
 /*
  * Description: 
  * <p> This class creates a hash map of the prescriptions and the details you enter.<p>
  * 
  * @author: Joseph Curto
- * @version: 05/15/2019
+ * @version: 07/28/2019
  */
 
 public class PrescriptionMap {
@@ -26,8 +28,8 @@ public class PrescriptionMap {
 	private float dosage;
 	private int dailyIntake;
 	private int hoursApart;
-	
 	/*
+	 * 
 	 * <p>The medDocumentation method acts as the UI, beginning with the questions, "Do you wish to enter any prescriptions?"
 	 * If you do, then you type yes, otherwise any other word typed in will give the exiting program prompt and terminate the program.
 	 * As the user types in the prescription name, dosage, daily amount, and how many hours apart the medication should be taken, they 
@@ -35,78 +37,79 @@ public class PrescriptionMap {
 	 * <p> After the questions have been asked, then the initial question of, "Do you wish to enter any prescriptions?" will be asked
 	 * until the user types in "no".<p>
 	 */
-	public void medDocumentation() throws FileNotFoundException{
+	public void medicalDocumentation() throws FileNotFoundException {
+		
 		int key = 1;
-		boolean prescript_Decision = true;
+		boolean prescription_Decision = true;
 		
 		do {
-		System.out.print("Do you wish to enter any prescriptions?");
-		String perscriptCount = scan.next();
+		System.out.print("Do you wish to enter any prescriptions? Y/N: ");
+		String decision = scan.next();
 		System.out.println();
 		
-		if(perscriptCount.equalsIgnoreCase("y")) {
+		if(decision.equalsIgnoreCase("y")) {
 			
 			System.out.print("Prescription Name: ");
-			String prescriptionName = scan.next();
-			
+			prescriptionName = scan.next();
+		
 			System.out.print("Enter the dosage in milligrams: ");
-			float dosage = scan.nextFloat();
-			validInputCheck();
+			dosage = scan.nextFloat();
+			validDosageCheck();
 			
 			System.out.print("Enter the daily amount: ");
-			int dailyIntake = scan.nextInt();
-			validInputCheck();
+			dailyIntake = scan.nextInt();
+			validIntakeCheck();
 			
 			System.out.print("Enter how many hours apart between dosages: ");
-			int hoursApart = scan.nextInt();
-			validInputCheck();
-		
+			hoursApart = scan.nextInt();
+			validHoursApartCheck();
+			
 			System.out.println();
 			
 			Prescription perscript = new Prescription(prescriptionName, dosage, dailyIntake, hoursApart);
 			hmap.put(key,perscript);
 			key++;
-		}//end if
+			
+			
+		}
 		else {
-			prescript_Decision = false;
+			prescription_Decision = false;
 			
 			printData();
 			printMap();
 			
 			System.out.println();
-		}//end else
-	}//end do
-		while(prescript_Decision == true); 
-	}//end medAddition
-	
-	/*
-	 * The validInputCheck method checks to see whether or not the user input is follows our parameters.
-	 */
-	private void validInputCheck(){
+			
+		}
 		
+	}//end do
+		
+		while(prescription_Decision == true); 
+		
+	}
+	
+	
+	private void validDosageCheck(){
 		while(dosage > 120){
 			System.out.print("You must enter a valid dosage(mg); ");
 			dosage = scan.nextFloat();
-		}//end while
+		}
+	}
 	
+	private void validIntakeCheck() {
 		while(dailyIntake > 12){
 			System.out.print("Please enter a lower daily intake: ");
 			dailyIntake = scan.nextInt();
-		}//end while
+		}
+	}
 		
+	private void validHoursApartCheck() {
 		while(hoursApart > 24){
 			System.out.print("Please enter a valid time period between dosages: ");
 			hoursApart = scan.nextInt();
-		}//end while
-			
-	}//end validInputCheck
+		}
+	}
 	
-	 /*
-	  * The deletePrescription method will delete the specified prescription.
-	  */
-	private void deletePrescription(int num) {
-		hmap.remove(num);
-	}//end deletePrescription
 	
 	/*
 	 * The deletionPrompt provides a UI for the user to interact with which allows them to 
@@ -114,105 +117,108 @@ public class PrescriptionMap {
 	 */
 	public void deletionPrompt() throws FileNotFoundException{
 		System.out.print("Do you need to delete a prescription? Y/N: ");
-		String choice = scan.next();
+		String decision = scan.next();
 		
-		while(choice.equalsIgnoreCase("y")){
+		while(decision.equalsIgnoreCase("y")){
 			System.out.println("Which prescription would you like to delete?");
 		
 			numericalPrint();
 		
 			System.out.println();
 			System.out.print("Please enter the number corresponding with the prescription: ");
-			int num = scan.nextInt();
-			deletePrescription(num);
+			int key = scan.nextInt();
+			deletePrescription(key);
 			
 			System.out.println("This is what remains after the deletion.");
 		
 			printData();
 			printMap();
 			System.exit(0);
-			
-		}//end while
-		scan.close();
+		}
 		
-		if(choice.equalsIgnoreCase("n")){
+		if(decision.equalsIgnoreCase("n")){
 			System.out.println("You have chosen not to delete a prescription.");
-			System.exit(0);
-		}//end if
+		}
 	}//end deletePrompt method
 	
+    
+	private void deletePrescription(int num) {
+		hmap.remove(num);
+	}
+	
+	
 	/*
-	 * The alterations method allows the user to alter an already existing prescription.
+	 * The alterations method allows the user to alter already existing prescriptions.
 	 */
 	public void alterations() throws FileNotFoundException{
 		
-		System.out.print("Would you like alter a certain perscription? Y/N: ");
-		String decision = scan.next();
+			System.out.print("Would you like alter a certain perscription? Y/N: ");
+			String decision = scan.next();
 			
-		while(!decision.equalsIgnoreCase("y") || decision.equalsIgnoreCase("n")){
-			System.out.print("You must enter either a Y or a N: ");
-			String second_Decision = scan.next();
+			while(!decision.equalsIgnoreCase("y") || decision.equalsIgnoreCase("n")){
+				System.out.print("You must enter either a Y or a N: ");
+				String second_Decision = scan.next();
 				
-			if(second_Decision.equalsIgnoreCase("y")){
-				decision = second_Decision;
-			}//end if
+				if(second_Decision.equalsIgnoreCase("y")){
+					decision = second_Decision;
+				}
 				
-			else if(second_Decision.equalsIgnoreCase("n")){
-				noAlterationPrompt();
-			}//end else if
+				else if(second_Decision.equalsIgnoreCase("n")){
+					noAlterationPrompt();
+				}
 					
-		}//end while
+			}
 		
-		if(decision.equalsIgnoreCase("y")){
-			numericalPrint();
-			System.out.print("Please enter the number corresponding with the prescription you wish to alter: ");
-			int num = scan.nextInt();
+			if(decision.equalsIgnoreCase("y")){
+				numericalPrint();
+				System.out.print("Please enter the number corresponding with the prescription you wish to alter: ");
+				int key = scan.nextInt();
 				
-			scan.nextLine();
-			System.out.print("What do you want to alter? Name, Dosage, Intake, or Hours Apart: ");
-			String choice = scan.nextLine();
+				scan.nextLine();
+				System.out.print("What do you want to alter? Name, Dosage, Intake, or Hours Apart: ");
+				String choice = scan.nextLine();
 				
-			if(choice.equalsIgnoreCase("Name")){
-				System.out.print("What would you like the new name to be: ");
-				String new_Name = scan.next();
-				hmap.get(num).setName(new_Name);
+				
+				//Basically allowing you to change the name of the prescription. Mainly used for misspelling.
+				if(choice.equalsIgnoreCase("Name")){
+					System.out.print("What would you like the new name to be: ");
+					String new_Name = scan.next();
+					hmap.get(key).setName(new_Name);
 					
+				}//end if
+				
+				else if(!choice.equalsIgnoreCase("Name")){
+					System.out.print("What would you like the new number to be? : ");
+					int new_num = scan.nextInt();
+					
+					//Changes the existing values to new ones.
+					switch(choice){
+					case "Dosage": hmap.get(key).setDosage((float)new_num); break;
+					case "Intake": hmap.get(key).setDailyIntake(new_num); break;
+					case "Hours Apart": hmap.get(key).setHoursApart(new_num); break;
+					}//end switch
+					
+				}//end else if
+				
+				System.out.println("This is the result of the alteration.");
+				printData();
+				printMap();
+				System.exit(0);
 			}//end if
-				
-			else if(!choice.equalsIgnoreCase("Name")){
-				System.out.print("What would you like the new number to be? : ");
-				int new_num = scan.nextInt();
-				
-				//Changes the existing values to new ones.
-				switch(choice){
-				case "Dosage": hmap.get(num).setDosage((float)new_num); break;
-				case "Intake": hmap.get(num).setDailyIntake(new_num); break;
-				case "Hours Apart": hmap.get(num).setHoursApart(new_num); break;
-				}//end switch
-					
-			}//end else if
-				
-			System.out.println("This is the result of the alteration.");
-			printData();
-			printMap();
-			System.exit(0);
-		}//end if
 			
 		else if(decision.equalsIgnoreCase("n")){
 			noAlterationPrompt();
 		}//end else if
-		
+			
 	scan.close();
-		
+	
 	}//end alterations
 	
-	/*
-	 * The noAlterationPrompt method reduces repetition of code in the alterations method.
-	 */
+	
 	private void noAlterationPrompt(){
 		System.out.println("You chose not to alter any prescriptions.");
 		System.exit(0);
-	}//end noAlterationPrompt method
+	}
 	
 	/*
 	 * The printData method simply formats the header of the table that will be printed out when the program terminates
@@ -221,11 +227,12 @@ public class PrescriptionMap {
 		System.out.printf("%-24s %-14s %-13s %-15s", "Prescription Name", "Dosage", "Daily Intake", "Hours Apart");
 		System.out.println();
 		System.out.println("-----------------------------------------------------------------");
-	}//end printData method
+		
+	}
 
 	/*
-	 * The printMap method prints the elements of the hash map to the table and saves a transcript of the
-	 * final version of the prescription tracker.
+	 * The printMap method prints the elements of the hash map to the table and saves a transcript of the final version of the 
+	 * prescription tracker.
 	 */
 	public void printMap() throws FileNotFoundException {
 		PrintStream pt = new PrintStream(new FileOutputStream("Prescription_Track.txt"));
@@ -241,14 +248,15 @@ public class PrescriptionMap {
 		pt.close();
 	}//end printMap
 	
+	
 	/*
-	 * This method prints the table with the key values and the prescription names.
+	 * numerical print is used to print the keys and the prescription names when the user is wanting to alter or delete a prescription.
 	 */
 	public void numericalPrint(){
 		int i = 1;
 		for(Entry<Integer, Prescription> entry: hmap.entrySet()) {
 			System.out.println(i + ". " + entry.getValue().getName());
 			i++;
-		}//end for
-	}//end numbericalPrint
+		}
+	}
 }//end class
